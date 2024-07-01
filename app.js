@@ -10,5 +10,8 @@ app.get('/api/pokemons/:id',(req,res)  => {
     const pokemon = pokemons.find(pokemon => pokemon.id === id)
     res.send(`Vous avez demandéle pokémon ${pokemon.name}.`)
 })
-
+app.get('/api/pokemons',(req,res)=> {
+    const number_of_pokemons = pokemons.length
+    res.send(`Il y a ${number_of_pokemons} pokemons dans le pokedex pour le moment.`)
+})
 app.listen(port,() => console.log(`Notre premiere application Node est demarée sur : http://localhost:${port}`)) //demarage de l'API Rest sur le port 300 et affichage d'un message de confirmation dans le terminal grace a listennm
