@@ -8,7 +8,7 @@ app.get('/',(req,res) => res.send('hello again, express !')) // definition du pr
 app.get('/api/pokemons/:id',(req,res)  => {
     const id  = parseInt(req.params.id)
     const pokemon = pokemons.find(pokemon => pokemon.id === id)
-    res.send(`Vous avez demandéle pokémon ${pokemon.name}.`)
+    res.json(pokemon)
 })
 app.get('/api/pokemons',(req,res)=> {
     const number_of_pokemons = pokemons.length
