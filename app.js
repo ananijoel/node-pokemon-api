@@ -1,4 +1,5 @@
 const express = require('express') //recuperation du packet express
+const {success} = require('./helper.js')
 let pokemons = require('./mock-pokemon')
 
 const app = new express() // creation d'une instance de l'application express, le petit serveur web sur lequel l'API rest va fonctionner
@@ -8,7 +9,8 @@ app.get('/',(req,res) => res.send('hello again, express !')) // definition du pr
 app.get('/api/pokemons/:id',(req,res)  => {
     const id  = parseInt(req.params.id)
     const pokemon = pokemons.find(pokemon => pokemon.id === id)
-    res.json(pokemon)
+    const message ='un pokemon a bien été trouvé'
+    res.json(success(message,pokemon))
 })
 app.get('/api/pokemons',(req,res)=> {
     const number_of_pokemons = pokemons.length
