@@ -1,5 +1,6 @@
 const express = require('express') //recuperation du packet express
 const morgan = require('morgan') //recuperation du packet morgan
+const favicon = require('serve-favicon')
 const {success} = require('./helper.js')
 let pokemons = require('./mock-pokemon')
 
@@ -7,7 +8,9 @@ const app = new express() // creation d'une instance de l'application express, l
 const port = 3000 // definition du port sur lequel on va demarrer l'API Rest
 
 
-app.use(morgan('dev'))
+app
+    .use(favicon('./favicon.ico'))
+    .use(morgan('dev'))
 
 app.get('/',(req,res) => res.send('hello again, express !')) // definition du premier point de terminaison (coeur d'express)
 app.get('/api/pokemons/:id',(req,res)  => {
