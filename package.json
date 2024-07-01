@@ -4,7 +4,7 @@
   "description": "An awesome API Rest to handle some pokemons.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "anatide anani",
   "license": "ISC",
