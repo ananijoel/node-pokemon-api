@@ -44,6 +44,14 @@ app.put('/api/pokemons/:id',(req,res)=>{
     })
     const message = `Le pokemon ${pokemonUpdated.name} a bien été mis a modifié.`
     res.json(success(message,pokemonUpdated))
-})
+})//point de terminaison qui permet de modifier un pokemon de la liste des pokemons grace a la methode put
+
+app.delete('/api/pokemons/:id',(req,res)=>{
+    const id = parseInt(req.params.id)
+    const pokemonDeleted = pokemons.find(pokemon => pokemon.id === id)
+    pokemons.filter(pokemon => pokemon.id !== id)
+    const message = `Le pokemon ${pokemonDeleted.name} a bien été mis a effacé.`
+    res.json(success(message,pokemonDeleted))
+})//point de terminaison qui permet de rediter un pokemon de la liste des pokemons grace a la methode delete
 
 app.listen(port,() => console.log(`Notre premiere application Node est demarée sur : http://localhost:${port}`)) //demarage de l'API Rest sur le port 300 et affichage d'un message de confirmation dans le terminal grace a listennm
