@@ -2,12 +2,30 @@ const express = require('express') //recuperation du packet express
 const morgan = require('morgan') //recuperation du packet morgan
 const favicon = require('serve-favicon') //recuperation du middleware de definition de la favicon
 const bodyParser = require('body-parser') //recuperation du middleware de conversion des entres de l'app en json
+const {Sequelize} = require('sequelize') //recuperation du packet sequelize
 const {success,getUniqueId} = require('./helper.js') // recuperaion du msssage de succes d'une requette et de la methode de recuperation de l'id a attribuer a un nouvel element de pokemons
 let pokemons = require('./mock-pokemon') // recuperaion du tableau pokemons
 
 const app = new express() // creation d'une instance de l'application express, le petit serveur web sur lequel l'API rest va fonctionner
 const port = 3000 // definition du port sur lequel on va demarrer l'API Rest
 
+const sequelize = new Sequelize(
+    'pokedex', //nom de la base de donnée
+    'root', //l'identifiantpermetttamt d'acceder a la base de donnée par defaut de mariadb
+    '', // mot de passe
+    {
+        host: 'localhost', // permet d'indiquer ou se trouve la base de données sur la machine
+        dialect: 'mariadb', // nom du driver 
+        dialectOptions: {
+            timezone: 'Etc/GMT' // evite l'affichag d'avertissements dans la console
+        },
+        logging: false // evite l'affichag d'avertissements dans la console
+    }
+)
+
+sequelize.authenticate()
+    .then(_=> console.log('la conexion a la base de donnée a bien été établie'))
+    .catch(error => console.error(`impossible de se connecter a la base de donnees ${error}`))
 
 app
     .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
