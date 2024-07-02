@@ -33,13 +33,15 @@ const Pokemon = PokemonModel(sequelize,DataTypes)
 sequelize.sync({force:true})
     .then(_ => {
         console.log('la base de donnée Pokemon a bien ete synchronisé')
+    pokemons.map(pokemon => {
         Pokemon.create({
-            name: "Bulbizarre",
-            hp: 25,
-            cp: 5,
-            picture: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
-            types: ["Plante", "Poison"].join()
+            name: pokemon.name,
+            hp: pokemon.hp,
+            cp: pokemon.cp,
+            picture: pokemon.picture,
+            types: pokemon.types.join()
         }).then(bulbizarre => console.log(bulbizarre.toJSON()))
+        });
     })
 app
     .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
