@@ -15,5 +15,10 @@ app
 sequelize.initDb()
 
 // ici nous placerons nos futurs endpoints
+require('./src/routes/findAllPokemons')(app)
+require('./src/routes/findPokemonByPk')(app)
+require('./src/routes/createPokemon')(app)
+require('./src/routes/updatePokemon')(app)
+require('./src/routes/deletePokemon')(app)
 
 app.listen(port,() => console.log(`Notre premiere application Node est demarée sur : http://localhost:${port}`)) //demarage de l'API Rest sur le port 300 et affichage d'un message de confirmation dans le terminal grace a listennm
