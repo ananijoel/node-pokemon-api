@@ -2,9 +2,10 @@ const express = require('express') //recuperation du packet express
 const morgan = require('morgan') //recuperation du packet morgan
 const favicon = require('serve-favicon') //recuperation du middleware de definition de la favicon
 const bodyParser = require('body-parser') //recuperation du middleware de conversion des entres de l'app en json
-const {Sequelize} = require('sequelize') //recuperation du packet sequelize
+const {Sequelize, DataTypes} = require('sequelize') //recuperation du packet sequelize
 const {success,getUniqueId} = require('./helper.js') // recuperaion du msssage de succes d'une requette et de la methode de recuperation de l'id a attribuer a un nouvel element de pokemons
 let pokemons = require('./mock-pokemon') // recuperaion du tableau pokemons
+const PokemonModel = require('./src/models/pokemon') 
 
 const app = new express() // creation d'une instance de l'application express, le petit serveur web sur lequel l'API rest va fonctionner
 const port = 3000 // definition du port sur lequel on va demarrer l'API Rest
@@ -27,6 +28,10 @@ sequelize.authenticate()
     .then(_=> console.log('la conexion a la base de donnée a bien été établie'))
     .catch(error => console.error(`impossible de se connecter a la base de donnees ${error}`))
 
+const Pokemon = PokemonModel(sequelize,DataTypes)
+
+sequelize.sync({force:true})
+    .then(_=> console.log('la base de donnée Pokemon a bien ete synchronisé'))
 app
     .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
     .use(morgan('dev'))//affiche l'url des requettes entrantes vers l'api rest

@@ -1,3 +1,4 @@
+/* L’API Rest et la Base de données : Créer un modèle Sequelize */
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Pokemon', {
       id: {
