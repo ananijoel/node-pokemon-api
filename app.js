@@ -21,4 +21,10 @@ require('./src/routes/createPokemon')(app)
 require('./src/routes/updatePokemon')(app)
 require('./src/routes/deletePokemon')(app)
 
+//Gestion des erreurs 404
+app,use(({res})=>{
+    const message = 'impossible de trouver la ressource demandée! Vous pouvez essayer une autre URL'
+    res.status(404).json({message})
+})
+
 app.listen(port,() => console.log(`Notre premiere application Node est demarée sur : http://localhost:${port}`)) //demarage de l'API Rest sur le port 300 et affichage d'un message de confirmation dans le terminal grace a listennm
