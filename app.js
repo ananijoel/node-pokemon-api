@@ -1,20 +1,20 @@
 const express = require('express') //recuperation du packet express
-const morgan = require('morgan') //recuperation du packet morgan
 const favicon = require('serve-favicon') //recuperation du middleware de definition de la favicon
 const bodyParser = require('body-parser') //recuperation du middleware de conversion des entres de l'app en json
 const sequelize = require('./src/db/sequelize')
 
 const app = new express() // creation d'une instance de l'application express, le petit serveur web sur lequel l'API rest va fonctionner
-const port = 3000 // definition du port sur lequel on va demarrer l'API Rest
+const port = process.env.PORT || 3000 // definition du port sur lequel on va demarrer l'API Rest
 
 app
     .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
-    .use(morgan('dev'))//affiche l'url des requettes entrantes vers l'api rest
     .use(bodyParser.json())// middleware qui sert a parser toutes les entres de la web app du format string au format json
     
 
 sequelize.initDb()
-
+app.get('/',(req,res)=>{
+    res.json('Hello,Heroku !')
+})
 // ici nous placerons nos futurs endpoints
 require('./src/routes/findAllPokemons')(app)
 require('./src/routes/findPokemonByPk')(app)
