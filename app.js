@@ -7,7 +7,7 @@ const app = new express() // creation d'une instance de l'application express, l
 const port = process.env.PORT || 3000 // definition du port sur lequel on va demarrer l'API Rest
 
 app
-    .use(favicon(__dirname+'/favicon.ico'))//definition de la favicon de l'applicaton
+    .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
     .use(bodyParser.json())// middleware qui sert a parser toutes les entres de la web app du format string au format json
     
 
