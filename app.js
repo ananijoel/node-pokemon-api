@@ -11,6 +11,7 @@ app
     .use(favicon('./favicon.ico'))//definition de la favicon de l'applicaton
     .use(morgan('dev'))//affiche l'url des requettes entrantes vers l'api rest
     .use(bodyParser.json())// middleware qui sert a parser toutes les entres de la web app du format string au format json
+    
 
 sequelize.initDb()
 
